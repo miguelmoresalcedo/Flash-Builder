@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			var active:Boolean = false;
+			
+			//LOGIN
+		//evento boton Login
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub				
+				if(nombre.text == password.text && nombre.text !="" && password.text !=""){	
+						active = true;
+						Deslogin.enabled = true
+						Login.enabled = false;
+				}else{
+					
+					Alert.show('Usuario no valido', 'Error', mx.controls.Alert.OK);
+					
+					//nombre.text = "";
+					//password.text = "";
+					
+				}
+					
+			}
+			
+			//evento radioCalculadora
+			
+			protected function radioCalculadora_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stu
+				if(radioCalculadora.selected && active == true){
+					calculadora.enabled = true;
+					Pitagoras.enabled = false;
+				}
+				
+			}
+			
+			//evento radioPitagoras
+			
+			protected function radioPitagoras_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				if(radioPitagoras.enabled && active == true)
+				Pitagoras.enabled = true;
+				calculadora.enabled = false;
+				
+			}
+			
+			//evento deslogin
+			
+			protected function Deslogin_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				nombre.text = "";
+				password.text = "";
+				calculadora.enabled = false;
+				Pitagoras.enabled = false;
+				Login.enabled = true;
+				Deslogin.enabled = false;
+				
+			}
+			
+			//HIPOTENUSA
+		//evento boton reiniciar
+			protected function Reiniciar_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				cateto1.text = "";
+				cateto2.text = "";
+				Texthipotenusa.text = "";		
+			
+			}
+			
+			
+			//boton imagen
+			protected function imagen_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+				var resultado:int
+						var numero1:int
+						var numero2:int
+				//ahora se va a convertir el texto a entero
+				numero1 = parseInt(cateto1.text)
+				numero2 = parseInt(cateto2.text)
+				//resultado = parseInt(Texthipotenusa.text)
+					
+				Texthipotenusa.text = Math.sqrt((Math.pow(numero1, 2) + Math.pow(numero2, 2))).toString().valueOf()
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Panel id="loginPrincipal" x="23" y="33" width="357" height="227" title="Login">
+		<s:TextInput id="nombre" x="7" y="29" width="172" height="31" prompt="Login"/>
+		<s:TextInput id="password" x="7" y="68" width="172" height="31" displayAsPassword="true"
+					 prompt="Password"/>
+		<s:Label x="209" y="29" width="73" height="31" text="Activar:"/>
+		<s:RadioButton id="radioCalculadora" x="201" y="55" width="125" label="Calculadora"
+					   click="radioCalculadora_clickHandler(event)" selected="true"/>
+		<s:RadioButton id="radioPitagoras" x="201" y="81" width="91" label="Pitágoras"
+					   click="radioPitagoras_clickHandler(event)"/>
+		<s:Button id="Login" x="46" y="126" width="110" height="38" label="Login"
+				  click="button1_clickHandler(event)"/>
+		<s:Button id="Deslogin" x="172" y="126" width="110" height="38" label="Logout"
+				  click="Deslogin_clickHandler(event)" enabled="false"/>
+	</s:Panel>
+	<s:Panel id="Pitagoras" x="23" y="268" width="356" height="190" enabled="false"
+			 title="Teorema de Pitagoras">
+		<s:Button id="Reiniciar" x="216" y="-23" width="128" label="Reiniciar"
+				  click="Reiniciar_clickHandler(event)"/>
+		<s:TextInput id="cateto1" x="216" y="10" height="39" fontSize="12" prompt="Cateto 1"/>
+		<s:TextInput id="cateto2" x="216" y="57" height="39" prompt="Cateto 2"/>
+		<s:TextInput id="Texthipotenusa" x="216" y="104" height="39" prompt="Hipotenusa"/>
+		<s:Image id="imagen" x="16" y="12" width="192" height="157"
+				 click="imagen_clickHandler(event)" source="assets/foto(1).png"/>
+	</s:Panel>
+	<s:Panel id="calculadora" x="402" y="33" width="256" height="425" enabled="false"
+			 title="Calculadora sencilla+">
+		<s:TextInput id="textoNumeros" x="10" y="1" width="236" height="25" enabled="false"/>
+		<s:TextInput id="textoResultado" x="10" y="35" width="236" height="82" enabled="false"/>
+		<s:Button id="numero7" x="10" y="258" width="52" height="58" label="7" fontSize="22"/>
+		<s:Button id="numero8" x="70" y="258" width="52" height="58" label="8" fontSize="22"/>
+		<s:Button id="numero4" x="10" y="192" width="52" height="58" label="4" fontSize="22"/>
+		<s:Button id="numero1" x="10" y="125" width="52" height="58" label="1" fontSize="22"/>
+		<s:Button id="numero2" x="70" y="125" width="52" height="58" label="2" fontSize="22"/>
+		<s:Button id="numero3" x="130" y="125" width="52" height="58" label="3" fontSize="22"/>
+		<s:Button id="suma" x="190" y="125" width="52" height="58" label="+" fontSize="22"/>
+		<s:Button id="numero5" x="70" y="192" width="52" height="58" label="5" fontSize="22"/>
+		<s:Button id="borrar" x="10" y="324" width="52" height="58" label="C" fontSize="22"/>
+		<s:Button id="numero0" x="70" y="324" width="52" height="58" label="0" fontSize="22"/>
+		<s:Button id="igual" x="130" y="324" width="52" height="58" label="=" fontSize="22"/>
+		<s:Button id="division" x="192" y="324" width="52" height="58" label="/" fontSize="22"/>
+		<s:Button id="numero9" x="130" y="258" width="52" height="58" label="9" fontSize="22"/>
+		<s:Button id="numero6" x="130" y="192" width="52" height="58" label="6" fontSize="22"/>
+		<s:Button id="resta" x="190" y="192" width="52" height="58" label="-" fontSize="22"/>
+		<s:Button id="multiplicacion" x="191" y="258" width="52" height="58" label="*" fontSize="22"/>
+	</s:Panel>
+</s:Application>
